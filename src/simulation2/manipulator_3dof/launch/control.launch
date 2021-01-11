@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <group ns="/mp">
+        <param name="robot_description" textfile="$(find manipulator_3dof)/urdf/body_gazebo.urdf"/>
+
+        <arg name="x" value="0.0" />
+        <arg name="y" value="0.0" />
+        <arg name="z" value="1.8" />
+        <arg name="roll" value="0.0"/>
+        <arg name="pitch" value="0.0"/>
+        <arg name="yaw" value="0.0" />
+        <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+                args="-urdf -param robot_description -model manipulator -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+        <rosparam command="load" file="$(find manipulator_3dof)/config/control.yaml"/>
+    
+        <node name="controller_spawner" pkg="controller_manager" type="spawner"
+            respawn="false" output="screen" ns="/mp"
+            args="--namespace=/mp joint_state_controller base_to_link_1_position_controller link_1_to_link_2_position_controller link_2_to_link_3_position_controller"
+        >
+        </node>
+    </group>
+</launch>

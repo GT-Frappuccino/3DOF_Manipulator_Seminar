@@ -1,0 +1,75 @@
+<?xml version='1.0' ?>
+<robot name='mainpulator_body'> 
+
+	<material name="Black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+	</material>
+	<material name="White">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+    </material>
+
+	<link name='base'>
+		<visual>
+			<origin xyz='0 0 0.25' rpy='0 0 0'/>
+			<geometry>
+                <box size='1 1 0.5'/>
+			</geometry>
+			<material name='White'/>
+		</visual>
+	</link>
+
+	<joint name='base_to_link_1' type='revolute'>
+		<parent link='base'/>
+        <child link='link_1'/>
+		<limit effort='100' lower='-3.14' upper='3.14' velocity='1'/>
+        <origin xyz='0 0 0.5' rpy='0 0 0'/>
+        <axis xyz='0 0 1'/>
+	</joint>
+	
+	<link name='link_1'>
+		<visual>
+			<origin xyz='0 0 2.5' rpy='0 0 0'/>
+			<geometry>
+                <cylinder radius='0' length='0'/>
+			</geometry>
+			<material name='White'/>
+		</visual>
+	</link>
+
+	<joint name='link_1_to_link_2' type='revolute'>
+		<parent link='link_1'/>
+        <child link='link_2'/>
+		<limit effort='100' lower='-3.14' upper='3.14' velocity='1'/>
+        <origin xyz='0 0 0' rpy='0 0 0'/>
+        <axis xyz='1 0 0'/>
+	</joint>
+
+	<link name='link_2'>
+        <visual>
+            <origin xyz='0 0 1.5' rpy='0 0 0'/>
+            <geometry>
+                <cylinder radius='0.3' length='3'/>
+            </geometry>
+            <material name='Black'/>
+        </visual>
+    </link>
+
+	<joint name='link_2_to_link_3' type='revolute'>
+		<parent link='link_2'/>
+        <child link='link_3'/>
+		<limit effort='100' lower='-3.14' upper='3.14' velocity='1'/>
+        <origin xyz='0 0 3' rpy='0 0 0'/>
+        <axis xyz='1 0 0'/>
+	</joint>
+
+	<link name='link_3'>
+        <visual>
+            <origin xyz='0 0 1.5' rpy='0 0 0'/>
+            <geometry>
+                <cylinder radius='0.3' length='3'/>
+            </geometry>
+            <material name='White'/>
+        </visual>
+    </link>
+
+</robot>

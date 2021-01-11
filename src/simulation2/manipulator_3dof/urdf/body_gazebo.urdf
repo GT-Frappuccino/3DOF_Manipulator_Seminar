@@ -1,0 +1,152 @@
+<?xml version='1.0' ?>
+<robot name='body'> 
+
+	<material name="Black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+	</material>
+	<material name="White">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+    </material>
+
+	<link name='base'>
+		<visual>
+			<origin xyz='0 0 0.25' rpy='0 0 0'/>
+			<geometry>
+                <box size='5 5 0.5'/>
+			</geometry>
+			<material name='White'/>
+		</visual>
+        <collision>
+            <origin xyz='0 0 0.25' rpy='0 0 0'/>
+            <geometry>
+                <box size='5 5 0.5'/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="12"/>
+            <inertia ixx="2" ixy="0.0" ixz="0.0" iyy="2" iyz="0.0" izz="2"/>
+        </inertial>
+	</link>
+
+	<joint name='base_to_link_1' type='revolute'>
+		<parent link='base'/>
+        <child link='link_1'/>
+		<limit effort='1000' lower='-3.14' upper='3.14' velocity='0.3'/>
+        <origin xyz='0 0 0.5' rpy='0 0 0'/>
+        <axis xyz='0 0 1'/>
+	</joint>
+
+	<transmission name="trans_base_to_link_1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="base_to_link_1">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_base_to_link_1">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+	<link name='link_1'>
+		<visual>
+			<origin xyz='0 0 0' rpy='0 0 0'/>
+			<geometry>
+                <cylinder radius='0.0' length='0.0'/>
+			</geometry>
+			<material name='White'/>
+		</visual>
+        <collision>
+			<origin xyz='0 0 0.025' rpy='0 0 0'/>
+            <geometry>
+                <cylinder radius='0.0' length='0.0'/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+	</link>
+
+	<joint name='link_1_to_link_2' type='revolute'>
+		<parent link='link_1'/>
+        <child link='link_2'/>
+		<limit effort='1000' lower='-3.14' upper='3.14' velocity='0.3'/>
+        <origin xyz='0 0 0' rpy='0 0 0'/>
+        <axis xyz='1 0 0'/>
+	</joint>
+
+	<transmission name="trans_link_1_to_link_2">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="link_1_to_link_2">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_link_1_to_link_2">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+	<link name='link_2'>
+        <visual>
+            <origin xyz='0 0 1.5' rpy='0 0 0'/>
+            <geometry>
+                <cylinder radius='0.3' length='3'/>
+            </geometry>
+            <material name='Black'/>
+        </visual>
+        <collision>
+            <origin xyz='0 0 1.5' rpy='0 0 0'/>
+            <geometry>
+                <cylinder radius='0.3' length='3'/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+
+	<joint name='link_2_to_link_3' type='revolute'>
+		<parent link='link_2'/>
+        <child link='link_3'/>
+		<limit effort='1000' lower='-3.14' upper='3.14' velocity='0.3'/>
+        <origin xyz='0 0 3' rpy='0 0 0'/>
+        <axis xyz='1 0 0'/>
+	</joint>
+
+	<transmission name="trans_link_2_to_link_3">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="link_2_to_link_3">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_link_2_to_link_3">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+	<link name='link_3'>
+        <visual>
+            <origin xyz='0 0 1.5' rpy='0 0 0'/>
+            <geometry>
+                <cylinder radius='0.3' length='3'/>
+            </geometry>
+            <material name='White'/>
+        </visual>
+        <collision>
+            <origin xyz='0 0 1.5' rpy='0 0 0'/>
+            <geometry>
+                <cylinder radius='0.3' length='3'/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
+    </gazebo>
+
+</robot>
